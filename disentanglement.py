@@ -478,7 +478,7 @@ if __name__ == '__main__':
     csv_file = args.file
 
     if mode not in range(0, 6):
-        print("wrong mode, please type VAE_eval.py -h for help")
+        print("wrong mode, please type disentanglement.py -h for help")
         raise ValueError
     print("Dataset:", args.data)
     main(mode, datapath, csv_file, seed)
