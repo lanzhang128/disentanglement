@@ -1,0 +1,9 @@
+n.: dogs cats foxes horses tigers
+v.: want need have get require
+adv.: really recently gradually frequently eventually
+adj.: happy big small beautiful fantastic
+prep.: on in for to of
+conj1.: although because when where whereas
+conj2.: and or
+comma: ,
+end-punc.: . !
