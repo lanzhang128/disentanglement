@@ -158,8 +158,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='model evaluation')
     tm_help = 'test mode: ' \
               '0 will reconstruct test set and report BLEU scores for reconstruction file, ' \
-              '1 will do homotopy evaluation, '
-    parser.add_argument('-tm', '--test_mode', default=1, type=int, help=tm_help)
+              '1 will do homotopy evaluation.'
+    parser.add_argument('-tm', '--test_mode', default=0, type=int, help=tm_help)
     parser.add_argument('-s', '--seed', default=0, type=int, help='random seed')
     parser.add_argument('-m', '--mpath', default='toy_capacity', help='path of model')
 
@@ -208,4 +208,4 @@ if __name__ == '__main__':
     elif mode == 1:
         homotopy(mt, model, z_dim, datapath, index2word)
     else:
-        print("wrong mode, please type VAE_eval.py -h for help")
+        print("wrong mode, please type quality.py -h for help")

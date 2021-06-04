@@ -92,7 +92,7 @@ if __name__ == '__main__':
     parser.add_argument('-beta', default=1, type=float, help='beta for training VAE, default: 1')
     parser.add_argument('-C', default=0, type=float, help='C for training VAE, default: 0')
     parser.add_argument('-s', '--seed', default=0, type=int, help='global random seed')
-    parser.add_argument('-m', '--mpath', default='test_3', help='path of model')
+    parser.add_argument('-m', '--mpath', default='test', help='path of model')
 
     args = parser.parse_args()
 
