@@ -1,7 +1,7 @@
 # Overview
 TBD
 # Dataset
-We provide the exact datasets used in this paper via Google Drive: https://drive.google.com/file/d/1lXxy7YIirtEIG7fqH4WOOfpS1TgFuvoI/view?usp=sharing. 
+We provide our synthetic datasets used in this paper via Google Drive: https://drive.google.com/file/d/1lXxy7YIirtEIG7fqH4WOOfpS1TgFuvoI/view?usp=sharing. 
 
 To view how we generate synthetic datasets, please dig into the dataset folder under this project.
 
@@ -16,11 +16,9 @@ VAE training. The dataset path is the relative path under Dataset directory. The
 Model Architecture with basic training and test methods.
 ### quantity.py
 Basic quantitative evaluation for VAE models including KL, Reconstruction Loss, Active Units. For models trained on synthetic datasets, it will also report disentanglement scores.
-### quanlity.py
+### quality.py
 Basic qualitative evaluation for VAE models including mean vector reconstruction and homotopy.
 ### disentanglement.py
 Using disentanglement metrics to caclulate disentanglement scores for representations of synthetic datasets.
 ### ideal_generation.py
 Using ideal representations of toy dataset to train and evaluate a LSTM generator.
-### classification.py
-Using a 2-hidden-layer MLP with 128 neurons and ReLU activation for classification task.
