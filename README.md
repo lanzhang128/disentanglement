@@ -9,10 +9,26 @@ To view how we generate synthetic datasets, please dig into the **"Dataset"** fo
 ### Environment Requirements
 tensorflow==2.4.1, numpy==1.19.5, pandas==1.1.5, scikit-Learn==0.24.1, nltk==3.5
 
-### Training
+### Training VAEs
 Before training a model, please create a **"Dataset"** folder to put datasets in and a **"model"** folder to store models. 
+To train a model, run:
+```
+python training.py -e [embedding dim] -r [RNN dim] -z [latent space dim] -b [batch size] -lr [learning rate] -mt [model type] -zm [coupling method] -beta [beta value for Beta-VAE] -C [C value for CCI-VAE] -s [seed] --epochs [epoch number] --datapath d [dataset path] --mpath [model path]
+```
+The *dataset path* is the relative path under **Dataset** directory. The *model path* is the relative path under **model** directory.
+
+We provide three *model types* in *modeling.py*: 'AE' (AutoEncoder with unidirectional LSTM encoder and decoder); 'VAE' ( Variational AutoEncoder with unidirectional LSTM encoder and decoder); 'BiVAE' ( Variational AutoEncoder with Bidirectional LSTM encoder and Unidirectional LSTM decoder). You can set different *beta* and *C* to obtain a vanilla [VAE](http://arxiv.org/abs/1312.6114), [Beta-VAE](https://openreview.net/forum?id=Sy2fzU9gl), or [CCI-VAE](https://arxiv.org/abs/1804.03599).
+
+We also provide 4 different *coupling method* as illusated in figure below: **0**: Initialisation; **1**: Concatenation; **2**: Initialisation and Concatenation; **3**: Concatenation with out word embeddings.
+
+![coupling method](/coupling.PNG)
 
 ### Evaluation
+TBD
+#### quantity.py
+Basic quantitative evaluation for VAE models including KL, Reconstruction Loss, Active Units. For models trained on synthetic datasets, it will also report disentanglement scores.
+#### quality.py
+Basic qualitative evaluation for VAE models including mean vector reconstruction and homotopy.
 
 ### Disentanglement Scores
 The disentanglement.py can be used directly to caculate disentanglement scores for representations of test set of synthetic datasets. In order to do this, you need to download synthetic datasets using the link above and put them under **"Dataset"** folder like in this repository.
@@ -39,17 +55,3 @@ We present sample *.csv* files of representations under **Examples** folder.
 |[Kumar et al., 2018](https://openreview.net/forum?id=H1kG7GZAW)|0.0086|0.0103|0.0468|0.0398|
 
 **Note**: because of the randomness, you may obtain slightly different results with different machines and random seeds.
-
-Please type "python XXX.py -h" for usage. To train VAEs, please create a "Dataset" folder to put datasets in and a "model" folder to store models.
-#### training.py
-VAE training. The dataset path is the relative path under Dataset directory. The trained model path is going to be the relative path under model directory.
-#### modeling.py
-Model Architecture with basic training and test methods.
-#### quantity.py
-Basic quantitative evaluation for VAE models including KL, Reconstruction Loss, Active Units. For models trained on synthetic datasets, it will also report disentanglement scores.
-#### quality.py
-Basic qualitative evaluation for VAE models including mean vector reconstruction and homotopy.
-#### disentanglement.py
-Using disentanglement metrics to caclulate disentanglement scores for representations of synthetic datasets.
-#### ideal_generation.py
-Using ideal representations of toy dataset to train and evaluate a LSTM generator.
