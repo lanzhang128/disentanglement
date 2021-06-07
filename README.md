@@ -3,7 +3,7 @@ TBD
 ## Dataset
 We provide our synthetic datasets used in this paper via Google Drive: https://drive.google.com/file/d/1lXxy7YIirtEIG7fqH4WOOfpS1TgFuvoI/view?usp=sharing. 
 
-To view how we generate synthetic datasets, please dig into the dataset folder under this project.
+To view how we generate synthetic datasets, please dig into the **"Dataset"** folder under this repository.
 
 ## Python Files Description
 ### Environment Requirements
@@ -15,7 +15,7 @@ Before training a model, please create a **"Dataset"** folder to put datasets in
 ### Evaluation
 
 ### Disentanglement Scores
-The disentanglement.py can be used directly to caculate disentanglement scores for representations of test set of synthetic datasets. In order to do this, you need to download the **"Dataset"** folder under this repo as-is.
+The disentanglement.py can be used directly to caculate disentanglement scores for representations of test set of synthetic datasets. In order to do this, you need to download synthetic datasets using the link above and put them under **"Dataset"** folder like in this repository.
 
 Run:
 ```
