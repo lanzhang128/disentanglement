@@ -28,7 +28,17 @@ Each *metric* is represented by an integer:
 *seed* is the random seed. *dataset* is the name of synthetic datasets: 'toy', 'ynoc', or 'pos'. *filepath* is the path of a *.csv* file which contains representations.
 
 #### Example usage
-We present a *.csv* file of representations for each synthetic dataset under **Examples** folder.
+We present sample *.csv* files of representations under **Examples** folder.
+|Metric|ynoc.csv|toy.csv|toy_ideal1.csv|toy_ideal2.csv|
+|------|------|------|------|------|
+|[Higgins et al., 2016](https://openreview.net/forum?id=Sy2fzU9gl)|42.30%|51.40%|100.00%|100.00%|
+|[Kim & Mnih, 2018](http://proceedings.mlr.press/v80/kim18b.html)|31.35%|50.68%|100.00%|100.00%|
+|[Chen et al., 2018](https://proceedings.neurips.cc/paper/2018/file/1ee3dfcd8a0645a25a35977997223d22-Paper.pdf)|0.0249|0.0852|0.8105|0.0573|
+|[Ridgeway & Mozer, 2018](https://proceedings.neurips.cc/paper/2018/file/2b24d495052a8ce66358eb576b8912c8-Paper.pdf)|0.9998|0.9952|1.0000|1.0000|
+|[Eastwood & Williams, 2018](https://openreview.net/forum?id=By-7dz-AZ)|0.0053|0.0107|0.6647|0.6345|
+|[Kumar et al., 2018](https://openreview.net/forum?id=H1kG7GZAW)|0.0086|0.0103|0.0468|0.0398|
+
+**Note**: because of the randomness, you may obtain slightly different results with different machines and random seeds.
 
 Please type "python XXX.py -h" for usage. To train VAEs, please create a "Dataset" folder to put datasets in and a "model" folder to store models.
 #### training.py
