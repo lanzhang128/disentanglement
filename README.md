@@ -21,7 +21,7 @@ We provide three *model types* in *modeling.py*: 'AE' (AutoEncoder with unidirec
 
 We also provide 4 different *coupling method* as illusated in figure below: **0**: Initialisation; **1**: Concatenation; **2**: Initialisation and Concatenation; **3**: Concatenation with out word embeddings.
 
-![coupling method](/coupling.PNG)
+![coupling method](/figures/coupling.PNG)
 
 ### Evaluation of VAEs
 We provide both quantitative and qualitative evalutaion for models trained via *training.py*.
@@ -38,7 +38,7 @@ python quality.py -tm [test mode] -s [seed] --mpath [model path]
 ```
 By setting *test mode*, this file can provide two basic qualitative evaluation for VAE models: **0**: mean vector reconstruction and BLEU scores cacluation; **1**: normal and dimension-wise homotopy (a 3D case dimension-wise example is illustrated below).
 
-![homotopy](/homotopy.PNG)
+![homotopy](/figures/homotopy.PNG)
 
 ### Disentanglement Scores
 The disentanglement.py can be used directly to caculate disentanglement scores for representations of test set of synthetic datasets. In order to do this, you need to download synthetic datasets using the link above and put them under **"Dataset"** folder like in this repository.
