@@ -15,7 +15,7 @@ To train a model, run:
 ```
 python training.py -e [embedding dim] -r [RNN dim] -z [latent space dim] -b [batch size] -lr [learning rate] -mt [model type] -zm [coupling method] -beta [beta value for Beta-VAE] -C [C value for CCI-VAE] -s [seed] --epochs [epoch number] --datapath d [dataset path] --mpath [model path]
 ```
-The *dataset path* is the relative path under **Dataset** directory. The *model path* is the relative path under **model** directory.
+The *dataset path* is the relative path under **Dataset** directory. The *model path* is the relative path under **model** directory, we suggest to use format.
 
 We provide three *model types* in *modeling.py*: 'AE' (AutoEncoder with unidirectional LSTM encoder and decoder); 'VAE' ( Variational AutoEncoder with unidirectional LSTM encoder and decoder); 'BiVAE' ( Variational AutoEncoder with Bidirectional LSTM encoder and Unidirectional LSTM decoder). You can set different *beta* and *C* to obtain a vanilla [VAE](http://arxiv.org/abs/1312.6114), [Beta-VAE](https://openreview.net/forum?id=Sy2fzU9gl), or [CCI-VAE](https://arxiv.org/abs/1804.03599).
 
@@ -23,12 +23,22 @@ We also provide 4 different *coupling method* as illusated in figure below: **0*
 
 ![coupling method](/coupling.PNG)
 
-### Evaluation
-TBD
-#### quantity.py
-Basic quantitative evaluation for VAE models including KL, Reconstruction Loss, Active Units. For models trained on synthetic datasets, it will also report disentanglement scores.
-#### quality.py
-Basic qualitative evaluation for VAE models including mean vector reconstruction and homotopy.
+### Evaluation of VAEs
+We provide both quantitative and qualitative evalutaion for models trained via *training.py*.
+
+For quantitative evaluation, run:
+```
+python quantity.py -s [seed] --mpath [model path]
+```
+This will provide basic quantitative evaluation for VAE models including KL, Reconstruction Loss, Active Units. For models trained on synthetic datasets, it can also report disentanglement scores of six disentanglement metrics if you set the *model path* in the format "[dataset]_XXX".
+
+For qualitative evaluation, run:
+```
+python quality.py -tm [test mode] -s [seed] --mpath [model path]
+```
+By setting *test mode*, this file can provide two basic qualitative evaluation for VAE models: **0**: mean vector reconstruction and BLEU scores cacluation; **1**: normal and dimension-wise homotopy (a 3D case dimension-wise example is illustrated below).
+
+![homotopy](/homotopy.PNG)
 
 ### Disentanglement Scores
 The disentanglement.py can be used directly to caculate disentanglement scores for representations of test set of synthetic datasets. In order to do this, you need to download synthetic datasets using the link above and put them under **"Dataset"** folder like in this repository.
