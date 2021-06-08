@@ -19,16 +19,16 @@ class GenerativeDataset:
         self.value_space = []
 
         # sentence indexes of sentences having each value
-        self.index_space = []
-
-        # representations of sentences based on index space
         self.sample_space = []
 
-    def get_sample_space(self, representations):
-        for i in range(0, len(self.index_space)):
-            self.sample_space.append([[] for _ in range(0, len(self.index_space[i]))])
-            for j in range(0, len(self.index_space[i])):
-                self.sample_space[i][j] = representations[self.index_space[i][j], :]
+        # representations of sentences based on sample space
+        self.representation_space = []
+
+    def get_representation_space(self, representations):
+        for i in range(0, len(self.sample_space)):
+            self.representation_space.append([[] for _ in range(0, len(self.sample_space[i]))])
+            for j in range(0, len(self.sample_space[i])):
+                self.representation_space[i][j] = representations[self.sample_space[i][j], :]
 
 
 class POSDataset(GenerativeDataset):
@@ -45,7 +45,7 @@ class POSDataset(GenerativeDataset):
                     continue
                 self.generative_factors.append(pos)
                 self.value_space.append([])
-                self.index_space.append([])
+                self.sample_space.append([])
 
         print("generative factors:", self.generative_factors)
         with open(os.path.join(path, 'test.txt'), 'r') as f:
@@ -67,10 +67,10 @@ class POSDataset(GenerativeDataset):
                     pos_index = self.generative_factors.index(pos)
                     if temp_word not in self.value_space[pos_index]:
                         self.value_space[pos_index].append(temp_word)
-                        self.index_space[pos_index].append([index])
+                        self.sample_space[pos_index].append([index])
                     else:
                         value_index = self.value_space[pos_index].index(temp_word)
-                        self.index_space[pos_index][value_index].append(index)
+                        self.sample_space[pos_index][value_index].append(index)
 
 
 class YNOCDataset(GenerativeDataset):
@@ -84,7 +84,7 @@ class YNOCDataset(GenerativeDataset):
                     continue
                 self.generative_factors.append(gf)
                 self.value_space.append(temp)
-                self.index_space.append([[] for _ in range(0, len(temp))])
+                self.sample_space.append([[] for _ in range(0, len(temp))])
 
         print("generative factors:", self.generative_factors)
         with open(os.path.join(path, 'test.txt'), 'r') as f:
@@ -97,7 +97,7 @@ class YNOCDataset(GenerativeDataset):
             for word in words:
                 for i in range(0, len(self.generative_factors)):
                     if word in self.value_space[i]:
-                        self.index_space[i][self.value_space[i].index(word)].append(index)
+                        self.sample_space[i][self.value_space[i].index(word)].append(index)
 
 
 class Disentanglement:
@@ -109,22 +109,22 @@ class Disentanglement:
         else:
             raise ValueError
         self.representations = representations
-        self.dataset.get_sample_space(representations)
+        self.dataset.get_representation_space(representations)
 
     def group_sampling(self, generative_factor, value, batch_size):
         i = self.dataset.generative_factors.index(generative_factor)
         j = self.dataset.value_space[i].index(value)
-        temp_space = self.dataset.sample_space[i][j]
+        temp_space = self.dataset.representation_space[i][j]
         return temp_space[random.sample(range(0, temp_space.shape[0]), batch_size), :]
 
     def stratified_sampling(self, generative_factor, sample_number):
         i = self.dataset.generative_factors.index(generative_factor)
-        p_value = [len(self.dataset.index_space[i][j]) for j in range(0, len(self.dataset.index_space[i]))]
+        p_value = [len(self.dataset.sample_space[i][j]) for j in range(0, len(self.dataset.sample_space[i]))]
         samples = []
         temp = sum(p_value)
         for j in range(0, len(p_value)):
             p_value[j] = p_value[j] / temp
-            temp_space = self.dataset.sample_space[i][j]
+            temp_space = self.dataset.representation_space[i][j]
             temp_sample_number = round(sample_number * p_value[j])
             temp_samples = temp_space[random.sample(range(0, temp_space.shape[0]), temp_sample_number), :]
             samples.append(temp_samples)
@@ -190,13 +190,13 @@ class Disentanglement:
         for i in range(0, len(self.dataset.generative_factors)):
             # sample observations for classification
             index = []
-            for j in range(0, len(self.dataset.index_space[i])):
-                index = index + self.dataset.index_space[i][j]
+            for j in range(0, len(self.dataset.sample_space[i])):
+                index = index + self.dataset.sample_space[i][j]
 
             for b in range(0, sample_number):
                 index_sample = random.sample(index, 1)[0]
-                for j in range(0, len(self.dataset.index_space[i])):
-                    if index_sample in self.dataset.index_space[i][j]:
+                for j in range(0, len(self.dataset.sample_space[i])):
+                    if index_sample in self.dataset.sample_space[i][j]:
                         break
                 z1 = self.group_sampling(self.dataset.generative_factors[i], self.dataset.value_space[i][j], batch_size)
                 z2 = self.group_sampling(self.dataset.generative_factors[i], self.dataset.value_space[i][j], batch_size)
@@ -245,13 +245,13 @@ class Disentanglement:
         # sample for each pos
         for i in range(0, len(self.dataset.generative_factors)):
             index = []
-            for j in range(0, len(self.dataset.index_space[i])):
-                index = index + self.dataset.index_space[i][j]
+            for j in range(0, len(self.dataset.sample_space[i])):
+                index = index + self.dataset.sample_space[i][j]
 
             for b in range(0, sample_number):
                 index_sample = random.sample(index, 1)[0]
-                for j in range(0, len(self.dataset.index_space[i])):
-                    if index_sample in self.dataset.index_space[i][j]:
+                for j in range(0, len(self.dataset.sample_space[i])):
+                    if index_sample in self.dataset.sample_space[i][j]:
                         break
                 z = self.group_sampling(self.dataset.generative_factors[i], self.dataset.value_space[i][j], batch_size)
                 z_var = np.var(z / scale, axis=0)
