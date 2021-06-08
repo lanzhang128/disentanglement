@@ -65,3 +65,32 @@ We present sample *.csv* files of representations under **Examples** folder.
 |[Kumar et al., 2018](https://openreview.net/forum?id=H1kG7GZAW)|0.0086|0.0103|0.0468|0.0398|
 
 **Note**: because of the randomness, you may obtain slightly different results with different machines and random seeds.
+
+#### Calculating Disentanglement Scores on Your Own Dataset
+You can calcluate disentanglement scores from representations of other datasets with the following prerequisites via subclassing **GenerativeDataset** class:
+
+![prerequisite](/figures/prerequisite.PNG)
+
+You first need to implement *init* to clarify these prerequistes of your own dataset in class attributes. 
+```python
+class NewDataset(GenerativeDataset):
+    def __init__(self, path):
+        super().__init__()
+        # self.generative factors = []
+        # self.value_space = []
+        # self.sample_space = []
+        # self.representation_space = []
+```
+
+Then, you should instantiate your own dataset class in *init* of **Disentanglement** class. 
+```python
+if os.path.basename(datapath) == 'pos':
+    self.dataset = POSDataset(datapath)
+elif os.path.basename(datapath) == 'ynoc' or os.path.basename(datapath) == 'toy':
+    self.dataset = YNOCDataset(datapath)
+elif os.path.basename(datapath) == '[your dataset name]':
+    self.dataset = NewDataset(datapath)
+else:
+    raise ValueError
+```
+Finally, you need to produce a *.csv* file containing representations of your dataset.
