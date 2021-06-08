@@ -1,5 +1,5 @@
 # Overview
-TBD
+This is the repository for paper: [Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets](https://arxiv.org/abs/2106.03631).
 ## Dataset
 We provide our synthetic datasets used in this paper via Google Drive: https://drive.google.com/file/d/1lXxy7YIirtEIG7fqH4WOOfpS1TgFuvoI/view?usp=sharing. 
 
@@ -94,3 +94,16 @@ else:
     raise ValueError
 ```
 Finally, you need to produce a *.csv* file containing representations of your dataset.
+
+## Citing
+If you find this repository useful, please cite:
+```
+@misc{zhang2021unsupervised,
+      title={Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets}, 
+      author={Lan Zhang and Victor Prokhorov and Ehsan Shareghi},
+      year={2021},
+      eprint={2106.03631},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
