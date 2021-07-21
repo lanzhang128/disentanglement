@@ -2,7 +2,6 @@ import os
 import random
 import argparse
 import tensorflow as tf
-import numpy as np
 from modeling import LSTMAE, LSTMVAE
 from nltk.translate.bleu_score import corpus_bleu
 
@@ -54,7 +53,7 @@ def mean_vector_reconstruct(model, mt, datapath, reconstruction_file, word2index
         if mt == 'AE':
             mean = model.encoding(x_batch_test)
         else:
-            mean = model.encoding(x_batch_test)[0]
+            mean = model.encoding(x_batch_test)[1]
         z = mean
         input = tf.constant(word2index['<bos>'], shape=(x_batch_test.shape[0], 1), dtype=tf.int64)
         state = None
