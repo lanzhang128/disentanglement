@@ -119,8 +119,8 @@ def homotopy(mt, model, z_dim, datapath, index2word):
         z1 = model.encoding(tf.constant(sentences[index[0]], shape=(1, len(sentences[index[0]]))))
         z2 = model.encoding(tf.constant(sentences[index[1]], shape=(1, len(sentences[index[1]]))))
     else:
-        z1 = model.encoding(tf.constant(sentences[0], shape=(1, len(sentences[0]))))[0]
-        z2 = model.encoding(tf.constant(sentences[1], shape=(1, len(sentences[1]))))[0]
+        z1 = model.encoding(tf.constant(sentences[0], shape=(1, len(sentences[0]))))[1]
+        z2 = model.encoding(tf.constant(sentences[1], shape=(1, len(sentences[1]))))[1]
     print(z1)
     print(z2)
 
@@ -195,8 +195,6 @@ if __name__ == '__main__':
     word2index, index2word = load_dic(datapath)
     model = load_model(mt, z_mode, emb_dim, rnn_dim, z_dim, vocab_size, lr, model_path)
 
-    tf.random.set_seed(seed)
-    np.random.seed(seed)
     random.seed(seed)
 
     if mode == 0:
