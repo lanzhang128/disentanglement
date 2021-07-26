@@ -1,5 +1,5 @@
 # Overview
-This is the repository for paper: [Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets](https://arxiv.org/abs/2106.03631).
+This is the repository for paper: [Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets](https://aclanthology.org/2021.repl4nlp-1.14).
 ## Dataset
 We provide our synthetic datasets used in this paper via Google Drive: https://drive.google.com/file/d/1lXxy7YIirtEIG7fqH4WOOfpS1TgFuvoI/view?usp=sharing. 
 
@@ -98,12 +98,17 @@ Finally, you need to produce a *.csv* file containing representations of your da
 ## Citing
 If you find this repository useful, please cite:
 ```
-@misc{zhang2021unsupervised,
-      title={Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets}, 
-      author={Lan Zhang and Victor Prokhorov and Ehsan Shareghi},
-      year={2021},
-      eprint={2106.03631},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{zhang-etal-2021-unsupervised,
+    title = "Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets",
+    author = "Zhang, Lan  and
+      Prokhorov, Victor  and
+      Shareghi, Ehsan",
+    booktitle = "Proceedings of the 6th Workshop on Representation Learning for NLP (RepL4NLP-2021)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.repl4nlp-1.14",
+    pages = "128--140",
 }
 ```
