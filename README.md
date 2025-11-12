@@ -98,17 +98,26 @@ Finally, you need to produce a *.csv* file containing representations of your da
 ## Citing
 If you find this repository useful, please cite:
 ```
-@inproceedings{zhang-etal-2021-unsupervised,
+@inproceedings{zhang-etal-2021-unsupervised-representation,
     title = "Unsupervised Representation Disentanglement of Text: An Evaluation on Synthetic Datasets",
     author = "Zhang, Lan  and
       Prokhorov, Victor  and
       Shareghi, Ehsan",
+    editor = "Rogers, Anna  and
+      Calixto, Iacer  and
+      Vuli{\'c}, Ivan  and
+      Saphra, Naomi  and
+      Kassner, Nora  and
+      Camburu, Oana-Maria  and
+      Bansal, Trapit  and
+      Shwartz, Vered",
     booktitle = "Proceedings of the 6th Workshop on Representation Learning for NLP (RepL4NLP-2021)",
     month = aug,
     year = "2021",
     address = "Online",
     publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/2021.repl4nlp-1.14",
-    pages = "128--140",
+    url = "https://aclanthology.org/2021.repl4nlp-1.14/",
+    doi = "10.18653/v1/2021.repl4nlp-1.14",
+    pages = "128--140"
 }
 ```
